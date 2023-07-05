@@ -1,0 +1,38 @@
+[
+  {
+    "id": 101,
+    "name": "SriRam",
+    "age": 25,
+    "lastName": "Male"
+  },
+   {
+    "id": 102,
+    "name": "Nagesh",
+    "age": 25,
+    "lastName": "Male"
+  },
+  {
+    "id": 103,
+    "name": "Abhi",
+    "age": 25,
+    "lastName": "Male"
+  },
+   {
+    "id": 104,
+    "name": "Nithish",
+    "age": 25,
+    "lastName": "Male"
+  },
+  {
+    "id": 105,
+    "name": "Gopi",
+    "age": 25,
+    "lastName": "Male"
+  },
+   {
+    "id": 106,
+    "name": "Akshay",
+    "age": 25,
+    "lastName": "Male"
+  }
+]
