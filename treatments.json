@@ -1,0 +1,12 @@
+[
+    {
+      "treatmentId" : 1001,
+      "id" : 1001,
+      "diagnosis" : "eye",
+      "treatment" : "eye test",
+      "dateOfTreatment" : "04-07-2023",
+      "cost" :4000
+    }
+    ]
+    
+    
