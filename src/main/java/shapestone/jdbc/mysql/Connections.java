@@ -17,8 +17,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Connections {
+	public static void table(List<PatientPojo> patientList, List<TreatmentPojo> treatmentList) throws SQLException {
+		getConnection();
+		createTable();
+		insertData(patientList, treatmentList);
 
-	public static Connection getconnection() throws SQLException {
+	}
+
+	public static Connection getConnection() throws SQLException {
 
 		String url = "jdbc:mysql://localhost:3306/learning sql";
 		String user = "root";
@@ -30,92 +36,121 @@ public class Connections {
 	}
 
 	public static void createTable() throws SQLException {
-		Connection connect = getconnection();
+		Connection connect = getConnection();
 
 		Statement statement = connect.createStatement();
-		statement.execute("DROP TABLE IF EXISTS patientquerry");
 
-		StringBuilder sb = new StringBuilder("CREATE TABLE patientquerry (");
-		sb.append("NAME VARCHAR(10) NOT NULL, ");
-		sb.append("ID INT PRIMARY KEY, ");
-		sb.append("AGE VARCHAR(10) NOT NULL, ");
-		sb.append("GENDER VARCHAR(10) NOT NULL, ");
-		sb.append("ADDRESS VARCHAR(20) NOT NULL,");
-		sb.append("DIAGNOSIS VARCHAR(20) NOT NULL,");
-		sb.append("TREATMENT VARCHAR(20) NOT NULL,");
-		sb.append("DATEOFTREATMENT VARCHAR(20) NOT NULL,");
-		sb.append("COST INT(20) NOT NULL)");
+		String query = "DROP TABLE IF EXISTS patients";
+		String query1 = "DROP TABLE IF EXISTS treatments";
+		statement.execute(query1);
+		statement.execute(query);
 
-		statement.execute(sb.toString());
+		// Create 'patients' table
+		StringBuilder patientsTableQuery = new StringBuilder("CREATE TABLE patients (");
+		patientsTableQuery.append("patientId INT PRIMARY KEY, ");
+		patientsTableQuery.append("name VARCHAR(50) NOT NULL, ");
+		patientsTableQuery.append("age INT NOT NULL, ");
+		patientsTableQuery.append("gender VARCHAR(10) NOT NULL, ");
+		patientsTableQuery.append("address VARCHAR(100) NOT NULL");
+		patientsTableQuery.append(")");
+		statement.execute(patientsTableQuery.toString());
 
-		System.out.println("Table 'patientquerry' created successfully.");
+		// Create 'treatments' table
+		StringBuilder treatmentsTableQuery = new StringBuilder("CREATE TABLE treatments (");
+		treatmentsTableQuery.append("treatmentId INT PRIMARY KEY, ");
+		treatmentsTableQuery.append("patientId INT NOT NULL, ");
+		treatmentsTableQuery.append("diagnosis VARCHAR(50) NOT NULL, ");
+		treatmentsTableQuery.append("treatment VARCHAR(50) NOT NULL, ");
+		treatmentsTableQuery.append("dateOfTreatment DATE NOT NULL, ");
+		treatmentsTableQuery.append("cost DECIMAL(10, 2) NOT NULL, ");
+		treatmentsTableQuery.append("FOREIGN KEY (patientId) REFERENCES patients(patientId)");
+		treatmentsTableQuery.append(")");
+		statement.execute(treatmentsTableQuery.toString());
+
+		System.out.println("Both tables are created successfully.");
+
 	}
 
-	public static void insertData(List<PatientPojo> patientList) throws SQLException {
-		Connection connect = getconnection();
-		String sql = "INSERT INTO patientquerry (name, id, age, gender, address,diagnosis,treatment,dateoftreatment,cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public static void insertData(List<PatientPojo> patientList, List<TreatmentPojo> treatmentList)
+			throws SQLException {
+		Connection connect = getConnection();
+		String sql = "INSERT INTO patients (name, patientId, age, gender, address) VALUES (?, ?, ?, ?, ?)";
+		String sqll = "INSERT INTO treatments(treatmentId,patientId,diagnosis,treatment,dateOfTreatment,cost) VALUES (?, ?, ?, ?, ?, ?)";
 		PreparedStatement statement = connect.prepareStatement(sql);
-
+		PreparedStatement statementt = connect.prepareStatement(sqll);
 		for (PatientPojo patient : patientList) {
 			statement.setString(1, patient.getName());
-			statement.setInt(2, patient.getId());
+			statement.setInt(2, patient.getpatientId());
 			statement.setInt(3, patient.getAge());
 			statement.setString(4, patient.getGender());
 			statement.setString(5, patient.getAddress());
-			statement.setString(6, patient.getDiagnosis());
-			statement.setString(7, patient.getTreatment());
-			statement.setString(8, patient.getDateOfTreatment());
-			statement.setInt(9, patient.getCost());
 			statement.executeUpdate();
 		}
+		for (TreatmentPojo treatment : treatmentList) {
+			statementt.setInt(1, treatment.getTreatmentId());
+			statementt.setInt(2, treatment.getPatientId());
+			statementt.setString(3, treatment.getDiagnosis());
+			statementt.setString(4, treatment.getTreatment());
+			statementt.setString(5, treatment.getDateOfTreatment());
+			statementt.setDouble(6, treatment.getCost());
+			statementt.executeUpdate();
+		}
 
-		System.out.println("Patients created successfully");
+		System.out.println("both tables data inserted successfully");
 	}
 
 	public static void readData() throws SQLException {
 
-		Connection connect = getconnection();
-		String sql = "SELECT * FROM patientquerry";
+		Connection connect = getConnection();
+		String sql = "SELECT * FROM patients";
 		PreparedStatement statement = connect.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
-		System.out.printf("%-10s %-10s %-10s %-10s %-20s %-20s %-20s %-20s %-10s%n", "ID", "Name", "Age", "Gender",
-				"Address", "Diagnosis", "Treatment", "Date of Treatment", "Cost");
+		System.out.printf("%-10s %-10s %-10s %-10s %-20s%n", "PatientId", "Name", "Age", "Gender", "Address");
 		while (resultSet.next()) {
-    System.out.println("------------------------------------------------------------------------------------------------"
-    		+ "-------------------------------------------------------");
- 			System.out.printf("%-10d %-10s %-10d %-10s %-20s %-20s %-20s %-20s %-10d%n", resultSet.getInt("id"),
+			System.out.println(
+					"----------------------------------------------------------------------------------------------");
+			System.out.printf("%-10d %-10s %-10d %-10s %-20s%n", resultSet.getInt("PatientId"),
 					resultSet.getString("name"), resultSet.getInt("age"), resultSet.getString("gender"),
-					resultSet.getString("address"), resultSet.getString("diagnosis"), resultSet.getString("treatment"),
-					resultSet.getString("dateOfTreatment"), resultSet.getInt("cost"));
+					resultSet.getString("address"));
 		}
-  System.out.println("-------------------------------------------------------------------------------------------"
-  		+ "-------------------------------------------------------------");
+		System.out
+				.println("-------------------------------------------------------------------------------------------");
 	}
 
-	public static void update(int age, int id) throws SQLException {
-		Connection connect = getconnection();
-		String sql = "UPDATE patientquerry SET age = ? WHERE id = ?";
+	public static void update(String address, int patientid) throws SQLException {
+		Connection connect = getConnection();
+		String sql = "UPDATE patients SET address = ? WHERE patientid = ?";
 		PreparedStatement statement = connect.prepareStatement(sql);
-		statement.setInt(1, age);
-		statement.setInt(2, id);
-		statement.execute();
-		System.out.println("Patients updated successfully");
+		statement.setString(1, address);
+		statement.setInt(2, patientid);
+		int rowsAffected = statement.executeUpdate();
+
+		if (rowsAffected > 0) {
+			System.out.println("Patients updated successfully");
+		} else {
+			System.out.println("Invalid patientId: " + patientid);
+		}
 	}
 
-	public static void deleteData(int id) throws SQLException {
-		Connection connect = getconnection();
-		String sql = "DELETE FROM patientquerry WHERE id=?";
+	public static void deleteData(int treatmentId) throws SQLException {
+		Connection connect = getConnection();
+		String sql = "DELETE FROM treatments WHERE treatmentId=?";
 		PreparedStatement statement = connect.prepareStatement(sql);
 
-		statement.setInt(1, id);
-		statement.execute();
-		System.out.println("entered id was deleted successfully");
+		statement.setInt(1, treatmentId);
+		int rowsAffected = statement.executeUpdate();
+
+		if (rowsAffected > 0) {
+			System.out.println("Entered treatmentid was deleted successfully");
+		} else {
+			System.out.println("Invalid treatmentId: " + treatmentId);
+		}
 	}
 
 	public static void patientNamesInAscending() throws SQLException {
 
-		Connection connect = getconnection();
-		String query = "SELECT NAME FROM patientquerry ORDER BY NAME ASC;";
+		Connection connect = getConnection();
+		String query = "SELECT NAME FROM patients ORDER BY NAME ASC;";
 		PreparedStatement preparedStatement = connect.prepareStatement(query);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
@@ -127,43 +162,37 @@ public class Connections {
 	}
 
 	public static void currentWeek() throws SQLException {
-		Connection connection = getconnection();
-		String query = "SELECT * FROM patientquerry WHERE WEEK(dateOfTreatment) = WEEK(CURDATE())";
+		Connection connection = getConnection();
+		String query = "SELECT * FROM treatments WHERE WEEK(dateOfTreatment) = WEEK(CURDATE())";
 
 		PreparedStatement statement = connection.prepareStatement(query);
 		ResultSet resultSet = statement.executeQuery();
 		System.out.println(" successful");
-
+		System.out.println("---------------------------------------------------------");
+		System.out.printf("|%-10s|%-10s|%-10s|%n", "treatmentId", "patientId", "dateOfTreatment");
 		while (resultSet.next()) {
-			System.out.println(
-					"---------------------------------------------------------------------------------------------------------------------");
-			System.out.printf("|%-30s|%-30s|%-30s|%-30s|%n", resultSet.getString("dateOfTreatment"),
-					resultSet.getInt("age"), resultSet.getString("gender"), resultSet.getString("name"));
+			System.out.println("---------------------------------------------------------------");
+			System.out.printf("|%-10s|%-10s|%-10s|%n", resultSet.getInt("treatmentId"), resultSet.getInt("patientId"),
+					resultSet.getString("dateOfTreatment"));
 		}
-		System.out.println(
-				"--------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("-------------------------------------------------------------------");
 	}
 
-	public static void totalCost(String name) throws SQLException {
-    		Connection connect=getconnection();
-    		 String query = "SELECT SUM(cost) AS total_cost FROM patientquerry WHERE name = ?;";
-             PreparedStatement statement = connect.prepareStatement(query);
-             statement.setString(1, name);
-             ResultSet resultSet = statement.executeQuery();
-             if (resultSet.next()) {
-                 int totalCost = resultSet.getInt("total_cost");
-                 System.out.println("Total Cost for Patient " + name + "$" + totalCost);
-             }
-             resultSet.close();
-             statement.close();
-             connect.close();
-
-    		
-    		
+	public static void totalCost(int patientId) throws SQLException {
+		Connection connect = getConnection();
+		String query = "SELECT SUM(cost) AS total_cost FROM treatments WHERE patientId = ?;";
+		PreparedStatement statement = connect.prepareStatement(query);
+		statement.setInt(1, patientId);
+		ResultSet resultSet = statement.executeQuery();
+		if (resultSet.next()) {
+			double totalCost = resultSet.getDouble("total_cost");
+			System.out.println("Total Cost for Patient " + patientId + ": $" + totalCost);
+		}
+	
+		resultSet.close();
+		statement.close();
+		connect.close();
 	}
-
-}
-
-
+	}
 
 

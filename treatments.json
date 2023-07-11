@@ -1,12 +1,52 @@
 [
     {
-      "treatmentId" : 1001,
-      "id" : 1001,
+      "treatmentId" : 1,
+      "patientId" : 1001,
       "diagnosis" : "eye",
       "treatment" : "eye test",
-      "dateOfTreatment" : "04-07-2023",
+      "dateOfTreatment" : "2023-07-11",
       "cost" :4000
-    }
+    },
+    {
+     "treatmentId" : 2,
+      "patientId" : 1008,
+       "diagnosis" : "heartproblem",
+      "treatment" : "heartoperation",
+      "dateOfTreatment" : "2023-07-11",
+      "cost" :40000
+    },
+    {
+     "treatmentId" : 3,
+      "patientId" : 1003,
+      "diagnosis" : "leg fracture",
+      "treatment" : "leg operation ",
+      "dateOfTreatment" : "2023-07-05",
+      "cost" :60000
+    },
+    {
+     "treatmentId" : 4,
+      "patientId" : 1004,
+      "diagnosis" : "eye",
+      "treatment" : "eye test",
+      "dateOfTreatment" : "2023-07-10",
+      "cost" :4000
+    },
+    {
+     "treatmentId" : 5,
+      "patientId" : 1005,
+        "diagnosis" : "eye",
+       "diagnosis" : "ear",
+      "treatment" : "ear test",
+      "dateOfTreatment" : "2023-07-10",
+      "cost" :2000
+    },
+    {
+      "patientId" : 1001,
+      "diagnosis" : "ear",
+      "treatment" : "ear test",
+      "dateOfTreatment" : "2023-07-11",
+      "cost" :4000
+      }
     ]
     
     
