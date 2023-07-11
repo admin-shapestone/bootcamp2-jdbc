@@ -15,7 +15,7 @@ import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class JdbcConection {
 
-	final static String DB_URL = "jdbc:mysql://localhost:3306/BankingDomin";
+	final static String DB_URL = "jdbc:mysql://localhost:3306/bank_domin";
 	final static String USER = "root";
 	final static String PASSWord = "pkbqyiytuh9#738";
 
@@ -26,13 +26,55 @@ public class JdbcConection {
 		return connect;
 	}
 
-	public static void createTable(List<Payments_Pojo> payments) throws SQLException {
+	public static void create_Insertdata(List<Accounts_pojo> accounts, List<Payments_Pojo> payments)
+			throws SQLException {
+		JdbcConection.getConnection();
+		JdbcConection.createAccountsTable();
+		JdbcConection.createPaymentsTable();
+		JdbcConection.insertDate(payments);
+		JdbcConection.insertDataIntoAccounts(accounts);
+
+	}
+
+	public static void createPaymentsTable() throws SQLException {
 		Connection connect = getConnection();
 		Statement statement = connect.createStatement();
-		statement.execute("drop table payments");
-		statement.execute(Table.createTable1(payments));
 
-		System.out.println("table created sucessfully");
+		statement.execute(Table.createTable1());
+
+		System.out.println("payments created sucessfully");
+
+	}
+
+	public static void createAccountsTable() throws SQLException {
+
+		Connection connect = getConnection();
+		Statement statement = connect.createStatement();
+
+		String tableAccountQuery = "create table AccountsTable(" + "AccountId BIGINT PRIMARY KEY," + "Name varchar(20),"
+				+ "Age INT," + "Gender varchar(10)," + "DateOfJoining Date," + "OpeningBalance DECIMAL(10,2))";
+
+		statement.execute(tableAccountQuery);
+		System.out.println("Accounts table created");
+
+	}
+
+	public static void insertDataIntoAccounts(List<Accounts_pojo> accounts) throws SQLException {
+		Connection connect = getConnection();
+		String insertData = "INSERT INTO accountstable (AccountId,Name,Age,Gender,DateOfjoining,OpeningBalance) "
+				+ "values(?,?,?,?,?,?);";
+		PreparedStatement statement = connect.prepareStatement(insertData);
+
+		for (Accounts_pojo account : accounts) {
+			statement.setLong(1, account.getAccountId());
+			statement.setString(2, account.getName());
+			statement.setInt(3, account.getAge());
+			statement.setString(4, account.getGender());
+			statement.setString(5, account.getDateOfJoining());
+			statement.setDouble(6, account.getOpeningBalance());
+			statement.executeUpdate();
+
+		}
 
 	}
 
@@ -44,19 +86,18 @@ public class JdbcConection {
 		Table.insertRecordsIntoPayments(prepareInsertQueries, statement);
 	}
 
-	public static void fetchAccountIdDetails(String acountId) throws SQLException {
+	public static void fetchAccountIdDetails(long accountId) throws SQLException {
 
 		Connection connect = getConnection();
 
-		String query = "select paymentid,openingbalance,amountpaid,name,dateOfjoining from payments p, accounts_table a where p.accountId = a.accountId and a.AccountId = "
-				+ acountId;
+		String query = "select paymentid,openingbalance,amountpaid,name,dateOfjoining from payments p, accountstable a where p.accountId = a.accountId and a.AccountId = "
+				+ accountId;
 		PreparedStatement preparedStatement = connect.prepareStatement(query);
 
 		ResultSet resultSet = preparedStatement.executeQuery();
-		/*
-		 * while (resultSet.next()) { System.out.println(resultSet.getInt(1)); }
-		 */
+
 		System.out.println("sucessFully fetched the data");
+
 		while (resultSet.next()) {
 			System.out.println(
 					"-----------------------------------------------------------------------------------------------------------------------------------------------");
@@ -68,10 +109,10 @@ public class JdbcConection {
 
 	}
 
-	public static void AccountDetailsInAsscendingOrder() throws SQLException {
+	public static void accountDetailsInAsscendingOrder() throws SQLException {
 		Connection connect = getConnection();
 
-		String query = "select * from Payments,Accounts_table order by name;";
+		String query = "select * from Payments,accountstable order by name;";
 		PreparedStatement preparedStatement = connect.prepareStatement(query);
 		ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -91,7 +132,7 @@ public class JdbcConection {
 	public static void printRecordsInCurrentWeek() throws SQLException {
 
 		Connection connect = getConnection();
-		String query = "SELECT * FROM accounts_table WHERE WEEK(dateOfJoining) = WEEK(CURDATE())";
+		String query = "SELECT * FROM accountstable WHERE WEEK(dateOfJoining) = WEEK(CURDATE())";
 
 		PreparedStatement statement = connect.prepareStatement(query);
 		ResultSet resultSet = statement.executeQuery();
@@ -107,14 +148,14 @@ public class JdbcConection {
 				"--------------------------------------------------------------------------------------------------------------------------");
 	}
 
-	public static void AccountBalance(String Accountid) throws SQLException {
+	public static void accountBalance(String accountId) throws SQLException {
 		Connection connect = getConnection();
 		String query = "SELECT a.accountId,a.name, a.openingbalance, p.purposeOfPayment, p.amountPaid, \r\n"
-				+ "       (a.openingbalance - p.amountPaid) AS Account_Balance \r\n" + "FROM accounts_table AS a \r\n"
+				+ "       (a.openingbalance - p.amountPaid) AS Account_Balance \r\n" + "FROM accountstable AS a \r\n"
 				+ "JOIN payments AS p \r\n" + "ON a.accountId = p.accountId\r\n" + "WHERE a.accountId = ?"
 				+ "LIMIT 0, 1000;";
 		PreparedStatement statement = connect.prepareStatement(query);
-		statement.setString(1, Accountid);
+		statement.setString(1, accountId);
 		ResultSet resultSet = statement.executeQuery();
 		System.out.println("Retrieval successful");
 
@@ -129,11 +170,11 @@ public class JdbcConection {
 
 	}
 
-	public static void deleteAccount(long id) throws SQLException {
+	public static void deleteAccount(String id) throws SQLException {
 		Connection connect = getConnection();
-		String query = "delete from accounts_table where AccountId = ?";
+		String query = "delete from accountstable where AccountId = ?";
 		PreparedStatement statement = connect.prepareStatement(query);
-		statement.setLong(1, id);
+		statement.setNString(1, id);
 		statement.execute();
 
 		System.out.println("sucessFully deleted account");
@@ -143,7 +184,7 @@ public class JdbcConection {
 	public static void updateAccount(String AccountId, String newAccountId) throws SQLException {
 
 		Connection connect = getConnection();
-		String query = "update accounts_table set name = ? where accountid = ?;";
+		String query = "update accountstable set name = ? where accountid = ?;";
 
 		PreparedStatement statement = connect.prepareStatement(query);
 		statement.setString(1, newAccountId);

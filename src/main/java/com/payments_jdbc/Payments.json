@@ -1,0 +1,60 @@
+
+[
+  {
+   "PaymentId":0001,
+   "accountId":9676626894,
+   "purposeOfPayment":"Electricity bill",
+   "amountPaid":2000,
+   "amountRecived":0,
+   "dateOfPayment":07-03-2023
+  },
+
+   {
+   "PaymentId":0002,
+   "accountId":9666256616,
+   "purposeOfPayment":"Utilities",
+   "amountPaid":2000,
+   "amountRecived":0,
+   "dateOfPayment":07-03-2023
+  },
+   
+    {
+   "PaymentId":0003,
+   "accountId":9014884458,
+   "purposeOfPayment":"flat rent",
+   "amountPaid":5000,
+   "amountRecived":0,
+   "dateOfPayment":09-03-2023
+  },
+
+
+ {
+   "PaymentId":0004,
+   "accountId":6281494760,
+   "purposeOfPayment":"Hospital payment",
+   "amountPaid":60000,
+   "amountRecived":0,
+   "dateOfPayment":11-03-2023
+  },
+  
+   {
+   "PaymentId":0005,
+   "accountId":9381712215,
+   "purposeOfPayment":"Mobil purchase",
+   "amountPaid":10000,
+   "amountRecived":0,
+   "dateOfPayment":12-03-2023
+  },
+
+{
+   "PaymentId":0006,
+   "accountId":6303374585,
+   "purposeOfPayment":"water bill",
+   "amountPaid":2000,
+   "amountRecived":0,
+   "dateOfPayment":15-03-2023
+  }
+]
+
+
+  

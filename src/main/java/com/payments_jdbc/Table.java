@@ -8,15 +8,16 @@ import java.util.List;
 
 public class Table {
 
-	public static String createTable1(List<Payments_Pojo> payments) {
+	public static String createTable1() {
 
 		StringBuffer sb = new StringBuffer("create table payments(");
-		sb.append("PaymentId Int Primary key ,");
+		sb.append("PaymentId Int,");
 		sb.append("AccountId BIGINT NOT NULL, ");
-		sb.append("PurposeOfPayment varchar(20) ,");
+		sb.append("PurposeOfPayment varchar(20),");
 		sb.append("AmountPaid Decimal(10,2) NOT NULL,");
-		sb.append("AmountRecived Decimal(10,2) ,");
-		sb.append("DateOfPayment Date NOT NULL);");
+		sb.append("AmountRecived Decimal(10,2),");
+		sb.append("DateOfPayment Date NOT NULL,");
+		sb.append("FOREIGN KEY (AccountId) REFERENCES AccountsTable(AccountId));");
 
 		return sb.toString();
 
@@ -51,4 +52,5 @@ public class Table {
 		}
 
 	}
+
 }
