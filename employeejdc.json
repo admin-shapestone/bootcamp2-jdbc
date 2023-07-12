@@ -1,0 +1,34 @@
+[
+  {
+    "empId": 1,
+    "name": "Gopi krishna",
+    "age": 25,
+    "gender": "male",
+    "address": "hyderabad",
+    "phoneNumber": 6281494760
+  },
+  {
+    "empId": 2,
+    "name": "Nitish",
+    "age": 23,
+    "gender": "male",
+    "address": "nandigama",
+    "phoneNumber": 9381712215
+  },
+  {
+    "empId": 3,
+    "name": "Nagesh",
+    "age": 27,
+    "gender": "male",
+    "address": "vijayawada",
+    "phoneNumber": 9999999999
+  },
+  {
+    "empId": 4,
+    "name": "phani",
+    "age": 23,
+    "gender": "male",
+    "address": "machilipatnam",
+    "phoneNumber": 9666256616
+  }
+]
