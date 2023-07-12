@@ -1,0 +1,40 @@
+[
+    {
+        "name": "Gopi",
+        "patientId": 1001,
+        "age": 24,
+        "gender": "male",
+        "address": "khammam"
+    },
+    {
+    
+        "name": "sravan",
+        "patientId": 1008,
+        "age": 25,
+        "gender": "male",
+        "address": "vemulavada" 
+    },
+    {
+        "name": "akshay",
+        "patientId": 1003,
+        "age": 26,
+        "gender": "male",
+        "address": "gadwal"  
+    },
+    {
+        "name": "funny",
+        "patientId": 1004,
+        "age": 21,
+        "gender": "male",
+        "address": "vizag"
+    },
+    {
+        "name": "nagesh",
+        "patientId": 1005,
+        "age": 20,
+        "gender": "male",
+        "address": "nandhigama"
+        
+       
+    }
+]
