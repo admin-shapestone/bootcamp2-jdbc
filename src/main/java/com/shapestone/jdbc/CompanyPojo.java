@@ -1,5 +1,7 @@
 package com.shapestone.jdbc;
 
+import java.sql.Date;
+
 public class CompanyPojo {
 	private int empId;
 	private int companyId;
@@ -8,7 +10,7 @@ public class CompanyPojo {
 	private double amountReceived;
 	private String companyName;
 	private double ctcTimeOfReleving;
-	private String dateOfJoining;
+	private Date dateOfJoining;
 	@Override
 	public String toString() {
 		return "CompanyPojo [empId=" + empId + ", companyId=" + companyId + ", emailId=" + emailId + ", dateOfReleving="
@@ -57,10 +59,10 @@ public class CompanyPojo {
 	public void setCtcTimeOfReleving(double ctcTimeOfReleving) {
 		this.ctcTimeOfReleving = ctcTimeOfReleving;
 	}
-	public String getDateOfJoining() {
+	public Date getDateOfJoining() {
 		return dateOfJoining;
 	}
-	public void setDateOfJoining(String dateOfJoining) {
+	public void setDateOfJoining(Date dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 }
