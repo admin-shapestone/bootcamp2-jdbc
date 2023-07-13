@@ -1,0 +1,41 @@
+[
+    {
+      
+    "passengerId": 786,
+    "name": "Nitish",
+    "age": 23,
+    "gender": "Male",
+    "address": "Nandigama"
+      
+    },
+    {      
+    "passengerId": 999,
+    "name": "Phani",
+    "age": 25,
+    "gender": "Male",
+    "address": "Bandhar"
+    },
+    {
+    "passengerId": 852,
+    "name": "Nagesh",
+    "age": 27,
+    "gender": "Male",
+    "address": "Bezawada"
+    },
+    {
+    "passengerId": 741,
+    "name": "Abhilash",
+    "age": 24,
+    "gender": "Male",
+    "address": "Gadwal"
+    },
+    {
+      "passengerId": 963,
+      "name": "Gopi",
+      "age": 26,
+      "gender": "Male",
+      "address": "Vizag"
+     
+    }
+  ]
+  

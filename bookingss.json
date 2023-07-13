@@ -1,0 +1,66 @@
+[
+  {
+    "bookingId": 1,
+    "passengerId": 786,
+    "originFrom": "Kphb",
+    "destinationTo": "Khammam",
+    "distance": 197,
+    "modeOfTransport": "MiniBus",
+    "pricePerKm": 22,
+    "dateOfJourney":"2023-07-13"
+  },
+  {
+    "bookingId": 2,
+    "passengerId": 999,
+    "originFrom": "Kphb",
+    "destinationTo": "Machilipatnam",
+    "distance": 320,
+    "modeOfTransport": "Car",
+    "pricePerKm": 22,
+    "dateOfJourney":"2023-07-06"
+  },
+  {
+    "bookingId": 3,
+    "passengerId": 852,
+    "originFrom": "Kphb",
+    "destinationTo": "Bezawada",
+    "distance": 272,
+    "modeOfTransport": "Car",
+    "pricePerKm": 22,
+    "dateOfJourney":"2023-07-11"
+  },
+  {
+    "bookingId": 4,
+    "passengerId": 741,
+    "originFrom": "Kphb",
+    "destinationTo": "Gadwal",
+    "distance": 190,
+    "modeOfTransport": "Car",
+    "pricePerKm": 22,
+    "dateOfJourney":"2023-07-05"
+  },
+  {
+    "bookingId": 5,
+    "passengerId": 963,
+    "originFrom": "Kphb",
+    "destinationTo": "Kodad",
+    "distance": 179,
+    "modeOfTransport": "Car",
+    "pricePerKm": 22,
+    "dateOfJourney":"2023-07-15"
+    
+  },
+    {
+    "bookingId": 6,
+    "passengerId": 786,
+    "originFrom": "Kphb",
+    "destinationTo": "Chennai",
+    "distance": 355,
+    "modeOfTransport": "Car",
+    "pricePerKm": 22.9,
+    "dateOfJourney":"2023-07-14"
+    
+  }
+  
+  
+]
