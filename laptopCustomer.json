@@ -1,0 +1,30 @@
+[
+  {
+    "customerId": 111,
+    "name": "phani ram",
+    "age": 25,
+    "gender": "Male",
+    "address": "Hyderabad"
+  },
+  {
+    "customerId": 222,
+    "name": "Nithish R",
+    "age": 22,
+    "gender": "Male",
+    "address": "Hyderabad"
+  },
+  {
+    "customerId": 333,
+    "name": "Abhilash",
+    "age": 23,
+    "gender": "Male",
+    "address": "Hyderabad"
+  },
+  {
+   "customerId": 444,
+   "name":"Akshay",
+   "age": 23,
+   "gender": "Male",
+   "address": "Hyderabad"
+   }
+  ]
