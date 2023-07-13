@@ -172,14 +172,14 @@ public class UserOptions {
 		PreparedStatement statement = connection.prepareStatement(query);
 		ResultSet resultSet = statement.executeQuery();
 		System.out.println(" successful");
-		System.out.println("--------------------------------------");
-		System.out.printf("|%-10s|%-10s|%-10s|%n", "PassengerId", "BookingId", "DateOfJourney");
+		System.out.println("-------------------------------------------------");
+		System.out.printf("|%-15s|%-15s|%-15s|%n", "PassengerId", "BookingId", "DateOfJourney");
 		while (resultSet.next()) {
-			System.out.println("-------------------------------------");
-			System.out.printf("|%-10s|%-10s|%-10s|%n", resultSet.getInt("PassengerId"), resultSet.getInt("BookingId"),
+			System.out.println("-------------------------------------------------");
+			System.out.printf("|%-15s|%-15s|%-15s|%n", resultSet.getInt("PassengerId"), resultSet.getInt("BookingId"),
 					resultSet.getString("dateOfJourney"));
 		}
-		System.out.println("-------------------------------------");
+		System.out.println("-------------------------------------------------");
 	}
 
 	public static void totalCost(String PassengerId) throws SQLException {
