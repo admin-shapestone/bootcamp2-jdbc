@@ -1,0 +1,60 @@
+[
+    {
+        "name": "Gopi",
+        "id": 1001,
+        "age": 24,
+        "gender": "male",
+        "address": "khamamm",
+        "diagnosis" : "eye",
+      "treatment" : "eye test",
+      "dateOfTreatment" : "2023-07-09",
+      "cost" :4000   
+    },
+    {
+    
+        "name": "Gopi",
+        "id": 1008,
+        "age": 25,
+        "gender": "male",
+        "address": "vemulavada",
+        "diagnosis" : "ear",
+      "treatment" : "ear test",
+      "dateOfTreatment" : "2023-07-10",
+      "cost" :2000
+        
+    },
+    {
+        "name": "akshay",
+        "id": 1003,
+        "age": 26,
+        "gender": "male",
+        "address": "gadwal",
+        "diagnosis" : "heartproblem",
+      "treatment" : "heartoperation",
+      "dateOfTreatment" : "2023-07-11",
+      "cost" :40000
+    },
+    {
+        "name": "funny",
+        "id": 1004,
+        "age": 21,
+        "gender": "male",
+        "address": "vizag",
+        "diagnosis" : "leg fracture",
+      "treatment" : "leg operation ",
+      "dateOfTreatment" : "2023-07-05",
+      "cost" :60000
+    },
+    {
+        "name": "nagesh",
+        "id": 1005,
+        "age": 20,
+        "gender": "male",
+        "address": "nandhigama",
+        "diagnosis" : "eye",
+      "treatment" : "eye test",
+      "dateOfTreatment" : "2023-07-06",
+      "cost" :4000
+       
+    }
+]

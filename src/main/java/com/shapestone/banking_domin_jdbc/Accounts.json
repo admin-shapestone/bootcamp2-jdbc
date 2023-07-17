@@ -1,0 +1,57 @@
+[
+  {
+   "accountId":9676626894,
+   "name":"Abhilash",
+   "age":23,
+   "gender":"male",
+   "dateOfJoining":"2023-03-06",
+    "openingBalance": 1000
+  },
+   {
+   "accountId":9666256616,
+   "name":"Funny",
+   "age":25,
+   "gender":"male",
+   "dateOfJoining":"2023-03-07",
+    "openingBalance": 1000
+   },
+    {
+   "accountId":9014884458,
+   "name":"Akshay",
+   "age":23,
+   "gender":"male",
+   "dateOfJoining":"2023-03-08",
+    "openingBalance": 1000
+         
+   },
+ {
+   "accountId":6281494760,
+   "name":"gopi",
+   "age":26,
+   "gender":"male",
+   "dateOfJoining":"2023-03-09",
+    "openingBalance": 1000
+        
+   },
+
+  {
+   "accountId":9381712215,
+   "name":"nitish",
+   "age":21,
+   "gender":"male",
+   "dateOfJoining":"2023-03-10",
+    "openingBalance": 1000
+   },
+
+   {
+   "accountId":6303374585,
+   "name":"nagesh",
+   "age":28,
+   "gender":"male",
+   "dateOfJoining":"2023-03-11",
+    "openingBalance": 1000
+
+
+   }
+]
+  

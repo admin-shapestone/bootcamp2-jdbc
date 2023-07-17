@@ -16,9 +16,9 @@ public class JdbcDriverProgram {
 		boolean creatTables = scanner.nextBoolean();
 		if (creatTables) {
 			createTables();
-			
+
 		}
-		
+
 		System.out.println("Done with execution. Exiting out...");
 
 	}
@@ -36,8 +36,7 @@ public class JdbcDriverProgram {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			try {
 				connnection.close();
 			} catch (SQLException e) {
