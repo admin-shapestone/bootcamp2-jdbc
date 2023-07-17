@@ -32,10 +32,13 @@ public class Connections {
 
 		Statement statement = connection.createStatement();
 
-		String query = "DROP TABLE IF EXISTS customers";
-		String query1 = "DROP TABLE IF EXISTS purchases";
-		statement.execute(query);
-		statement.execute(query1);
+		String dropConstraintQuery = "ALTER TABLE purchases DROP FOREIGN KEY purchases_ibfk_1";
+		statement.execute(dropConstraintQuery);
+
+		String dropCustomersQuery = "DROP TABLE IF EXISTS customers";
+		String dropPurchasesQuery = "DROP TABLE IF EXISTS purchases";
+		statement.execute(dropCustomersQuery);
+		statement.execute(dropPurchasesQuery);
 
 		StringBuffer stringBufferCustomer = new StringBuffer("create table Customers(");
 		stringBufferCustomer.append("CUSTOMERID INT PRIMARY KEY,");
@@ -66,7 +69,7 @@ public class Connections {
 			ArrayList<LaptopPurchases> laptopPurchases) throws SQLException {
 
 		Connection connection = getConnetion1();
-		String sql= "INSERT INTO customers (customerId, name,  age, gender, address) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO customers (customerId, name,  age, gender, address) VALUES (?, ?, ?, ?, ?)";
 		String sql1 = "INSERT INTO PURCHASES (customerId,purchaseId,quantity,itemPurchased,price,dateOfPurchase) VALUES (?, ?, ?, ?, ?,?)";
 		PreparedStatement statementCustomer = connection.prepareStatement(sql);
 		PreparedStatement statementPurchase = connection.prepareStatement(sql1);
@@ -101,16 +104,19 @@ public class Connections {
 		PreparedStatement preparedstatement = connection.prepareStatement(sql);
 		preparedstatement.setInt(1, customerId);
 		ResultSet resultSet = preparedstatement.executeQuery();
-		System.out.println("----------------------------------------------------------------------------------------------------------");
-		System.out.printf("| %-15s | %-15s | %-10s | %-17s | %-15s | %-15s |%n", "PurchaserId", "Name", "price", "ItemPurchased",
-			 "DateOfPurchased", "Address");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------");
+		System.out.printf("| %-15s | %-15s | %-10s | %-17s | %-15s | %-15s |%n", "PurchaserId", "Name", "price",
+				"ItemPurchased", "DateOfPurchased", "Address");
 		while (resultSet.next()) {
-			System.out.println("----------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------");
 			System.out.printf("| %-15s | %-15s | %-10s | %-17s | %-15s | %-15s |%n", resultSet.getInt(1),
-					resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
-					resultSet.getDate(5),resultSet.getString(6)) ;
+					resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4), resultSet.getDate(5),
+					resultSet.getString(6));
 		}
-		System.out.println("----------------------------------------------------------------------------------------------------------");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------");
 		System.out.println("Data reading is sucessfully completed");
 	}
 
