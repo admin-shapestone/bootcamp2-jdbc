@@ -1,4 +1,4 @@
-package com.payments_jdbc;
+package com.shapestone.banking_domin_jdbc;
 
 import java.sql.SQLException;
 import java.sql.Statement;
