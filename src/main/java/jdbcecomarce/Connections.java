@@ -17,11 +17,11 @@ public class Connections {
 
 	final static String DB_URL = "jdbc:mysql://localhost:3306/employee";
 	final static String USER = "root";
-	final static String PASSWord = "Phanirama@1997";
+	final static String PASSWORD = "Phanirama@1997";
 
 	public static Connection getConnetion1() throws SQLException {
 
-		Connection con = DriverManager.getConnection(DB_URL, USER, PASSWord);
+		Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
 		System.out.println("connection sucessfull");
 		return con;
@@ -32,32 +32,32 @@ public class Connections {
 
 		Statement statement = connection.createStatement();
 
-		String query = "DROP TABLE IF EXISTS passengers";
-		String query1 = "DROP TABLE IF EXISTS bookingss";
+		String query = "DROP TABLE IF EXISTS customers";
+		String query1 = "DROP TABLE IF EXISTS purchases";
 		statement.execute(query);
 		statement.execute(query1);
 
-		StringBuffer stringBuffer = new StringBuffer("create table Customers(");
-		stringBuffer.append("CUSTOMERID INT PRIMARY KEY,");
-		stringBuffer.append("NAME VARCHAR(100) NOT NULL, ");
-		stringBuffer.append("AGE INT NOT NULL,");
-		stringBuffer.append("GENDER VARCHAR(20) NOT NULL,");
-		stringBuffer.append("ADDRESS VARCHAR(200) NOT NULL");
-		stringBuffer.append(")");
+		StringBuffer stringBufferCustomer = new StringBuffer("create table Customers(");
+		stringBufferCustomer.append("CUSTOMERID INT PRIMARY KEY,");
+		stringBufferCustomer.append("NAME VARCHAR(100) NOT NULL, ");
+		stringBufferCustomer.append("AGE INT NOT NULL,");
+		stringBufferCustomer.append("GENDER VARCHAR(20) NOT NULL,");
+		stringBufferCustomer.append("ADDRESS VARCHAR(200) NOT NULL");
+		stringBufferCustomer.append(")");
 
-		statement.execute(stringBuffer.toString());
+		statement.execute(stringBufferCustomer.toString());
 
-		StringBuffer stringBuffer1 = new StringBuffer("create table Purchases(");
-		stringBuffer1.append("CUSTOMERID INT NOT NULL,");
-		stringBuffer1.append("PURCHASEID INT PRIMARY KEY,");
-		stringBuffer1.append("QUANTITY INT NOT NULL,");
-		stringBuffer1.append("ITEMPURCHASED VARCHAR(100) NOT NULL,");
-		stringBuffer1.append("PRICE DECIMAL(10,2) NOT NULL,");
-		stringBuffer1.append("DATEOFPURCHASE DATE,");
-		stringBuffer1.append("FOREIGN KEY (customerId) REFERENCES Customers(customerId)");
-		stringBuffer1.append(")");
+		StringBuffer stringBufferPurchase = new StringBuffer("create table Purchases(");
+		stringBufferPurchase.append("CUSTOMERID INT NOT NULL,");
+		stringBufferPurchase.append("PURCHASEID INT PRIMARY KEY,");
+		stringBufferPurchase.append("QUANTITY INT NOT NULL,");
+		stringBufferPurchase.append("ITEMPURCHASED VARCHAR(100) NOT NULL,");
+		stringBufferPurchase.append("PRICE DECIMAL(10,2) NOT NULL,");
+		stringBufferPurchase.append("DATEOFPURCHASE DATE,");
+		stringBufferPurchase.append("FOREIGN KEY (customerId) REFERENCES Customers(customerId)");
+		stringBufferPurchase.append(")");
 
-		statement.execute(stringBuffer1.toString());
+		statement.execute(stringBufferPurchase.toString());
 
 		System.out.println("Tables Scussefully Created");
 	}
@@ -66,29 +66,29 @@ public class Connections {
 			ArrayList<LaptopPurchases> laptopPurchases) throws SQLException {
 
 		Connection connection = getConnetion1();
-		String sql = "INSERT INTO customers (customerId, name,  age, gender, address) VALUES (?, ?, ?, ?, ?)";
+		String sql= "INSERT INTO customers (customerId, name,  age, gender, address) VALUES (?, ?, ?, ?, ?)";
 		String sql1 = "INSERT INTO PURCHASES (customerId,purchaseId,quantity,itemPurchased,price,dateOfPurchase) VALUES (?, ?, ?, ?, ?,?)";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		PreparedStatement statement1 = connection.prepareStatement(sql1);
+		PreparedStatement statementCustomer = connection.prepareStatement(sql);
+		PreparedStatement statementPurchase = connection.prepareStatement(sql1);
 		for (LaptopCustomers customer : laptopcustomers) {
-			statement.setInt(1, customer.getCustomerId());
-			statement.setString(2, customer.getName());
-			statement.setInt(3, customer.getAge());
-			statement.setString(4, customer.getGender());
-			statement.setString(5, customer.getAddress());
+			statementCustomer.setInt(1, customer.getCustomerId());
+			statementCustomer.setString(2, customer.getName());
+			statementCustomer.setInt(3, customer.getAge());
+			statementCustomer.setString(4, customer.getGender());
+			statementCustomer.setString(5, customer.getAddress());
 
-			statement.executeUpdate();
+			statementCustomer.executeUpdate();
 		}
 
 		for (LaptopPurchases purchase : laptopPurchases) {
-			statement1.setInt(1, purchase.getCustomerId());
-			statement1.setInt(2, purchase.getPurchaseId());
-			statement1.setInt(3, purchase.getQuantity());
-			statement1.setString(4, purchase.getItemPurchased());
-			statement1.setDouble(5, purchase.getPrice());
-			statement1.setString(6, purchase.getDateOfPurchase());
+			statementPurchase.setInt(1, purchase.getCustomerId());
+			statementPurchase.setInt(2, purchase.getPurchaseId());
+			statementPurchase.setInt(3, purchase.getQuantity());
+			statementPurchase.setString(4, purchase.getItemPurchased());
+			statementPurchase.setDouble(5, purchase.getPrice());
+			statementPurchase.setDate(6, purchase.getDateOfPurchase());
 
-			statement1.executeUpdate();
+			statementPurchase.executeUpdate();
 		}
 
 		System.out.println(" Data Inserted successfully");
@@ -97,20 +97,20 @@ public class Connections {
 	public static void readTables(int customerId) throws SQLException {
 
 		Connection connection = getConnetion1();
-		String sql = "select * from customers where customerId=?";
+		String sql = "select PURCHASEID,NAME,PRICE,ITEMPURCHASED,DATEOFPURCHASE,ADDRESS from customers c,purchases p where c.CUSTOMERID = p.CUSTOMERID and c.CUSTOMERID  = ?;";
 		PreparedStatement preparedstatement = connection.prepareStatement(sql);
 		preparedstatement.setInt(1, customerId);
 		ResultSet resultSet = preparedstatement.executeQuery();
-		System.out.println("-----------------------------------------------------------------------");
-		System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-15s |%n", "CustomerId", "Name", "Age", "Gender",
-				"Address");
+		System.out.println("----------------------------------------------------------------------------------------------------------");
+		System.out.printf("| %-15s | %-15s | %-10s | %-17s | %-15s | %-15s |%n", "PurchaserId", "Name", "price", "ItemPurchased",
+			 "DateOfPurchased", "Address");
 		while (resultSet.next()) {
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-15s |%n", resultSet.getInt("customerId"),
-					resultSet.getString("name"), resultSet.getInt("age"), resultSet.getString("gender"),
-					resultSet.getString("address"));
+			System.out.println("----------------------------------------------------------------------------------------------------------");
+			System.out.printf("| %-15s | %-15s | %-10s | %-17s | %-15s | %-15s |%n", resultSet.getInt(1),
+					resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
+					resultSet.getDate(5),resultSet.getString(6)) ;
 		}
-		System.out.println("-----------------------------------------------------------------------");
+		System.out.println("----------------------------------------------------------------------------------------------------------");
 		System.out.println("Data reading is sucessfully completed");
 	}
 
@@ -178,7 +178,6 @@ public class Connections {
 					resultset.getDouble("price"), resultset.getString("dateOfPurchase"));
 			System.out.println(
 					"-------------------------------------------------------------------------------------------------------------");
-
 		}
 
 	}

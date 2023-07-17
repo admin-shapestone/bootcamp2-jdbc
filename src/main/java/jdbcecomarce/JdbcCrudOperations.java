@@ -71,7 +71,10 @@ public class JdbcCrudOperations {
 			System.out.println("enter customerId");
 			int customerId1 = scanner.nextInt();
 			Connections.totalPurchases(customerId1);
+		 } else {
+	            System.out.println("Invalid option");
+	        }
 
 		}
 	}
-}
+

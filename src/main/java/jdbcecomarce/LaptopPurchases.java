@@ -1,5 +1,7 @@
 package jdbcecomarce;
 
+import java.util.Date;
+
 public class LaptopPurchases {
 
 	private int customerId;
@@ -7,7 +9,7 @@ public class LaptopPurchases {
 	private int quantity;
 	private String itemPurchased;
 	private double price;
-	private String dateOfPurchase;
+	private Date dateOfPurchase;
 
 	public int getCustomerId() {
 		return customerId;
@@ -49,11 +51,12 @@ public class LaptopPurchases {
 		this.price = price;
 	}
 
-	public String getDateOfPurchase() {
-		return dateOfPurchase;
+	
+	public java.sql.Date getDateOfPurchase() {
+		return getDateOfPurchase();
 	}
 
-	public void setDateOfPurchase(String dateOfPurchase) {
+	public void setDateOfPurchase(Date dateOfPurchase) {
 		this.dateOfPurchase = dateOfPurchase;
 	}
 
@@ -63,4 +66,5 @@ public class LaptopPurchases {
 				+ ", itemPurchased=" + itemPurchased + ", price=" + price + ", dateOfPurchase=" + dateOfPurchase + "]";
 	}
 
+	
 }
