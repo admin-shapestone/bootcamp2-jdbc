@@ -1,0 +1,56 @@
+[
+  {
+    "empId": 1,
+    "companyId": 12,
+    "emailId": "gopikrishnaa12@gmail.com",
+    "dateOfReleving": "2018-05-15",
+    "amountReceived": 60000,
+    "companyName": "LNT Corporation",
+    "ctcTimeOfReleving": "600000",
+    "dateOfJoining": "2023-07-10"
+    
+  },
+  {
+    "empId": 1,
+    "companyId":5,
+    "emailId": "gopikrishnaa12@gmail.com",
+    "dateOfReleving": "2018-05-15",
+    "amountReceived": 60000,
+    "companyName": "LNT Corporation",
+    "ctcTimeOfReleving": "800000",
+    "dateOfJoining": "2023-07-10"
+  }, 
+  {
+    "empId": 2,
+    "companyId": 21,
+    "emailId": "nitishrayapati@gmail.com",
+    "dateOfReleving": "2023-05-20",
+    "amountReceived": 40000,
+    "companyName": "Tata Corporation",
+    "ctcTimeOfReleving": "600000",
+    "dateOfJoining": "2023-07-11"
+
+  },
+  {
+    "empId": 3,
+    "companyId": 35,
+    "emailId": "nagesh@gmail.com",
+    "dateOfReleving": "2014-02-05",
+    "amountReceived": 80000,
+    "companyName": "Textile Industries",
+    "ctcTimeOfReleving": "1000000",
+    "dateOfJoining": "2023-07-12"
+
+  },
+  {
+    "empId": 4,
+    "companyId": 23,
+    "emailId": "phanisrirama@gmail.com",
+    "dateOfReleving": "2020-12-15",
+    "amountReceived": 40000,
+    "companyName": "Avalon Solutions",
+    "ctcTimeOfReleving": "600000",
+    "dateOfJoining": "2023-07-15"
+
+  }
+]
