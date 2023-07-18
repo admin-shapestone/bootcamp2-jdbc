@@ -78,7 +78,7 @@ public class Connections {
 			companyStatement.setInt(1, company.getEmpId());
 			companyStatement.setInt(2, company.getCompanyId());
 			companyStatement.setString(3, company.getEmailId());
-			companyStatement.setString(4, company.getDateOfReleving());
+			companyStatement.setDate(4, company.getDateOfReleving());
 			companyStatement.setDouble(5, company.getAmountReceived());
 			companyStatement.setString(6, company.getCompanyName());
 			companyStatement.setDouble(7, company.getCtcTimeOfReleving());

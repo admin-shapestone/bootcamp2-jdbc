@@ -6,7 +6,7 @@ public class CompanyPojo {
 	private int empId;
 	private int companyId;
 	private String emailId;
-	private String dateOfReleving;
+	private Date dateOfReleving;
 	private double amountReceived;
 	private String companyName;
 	private double ctcTimeOfReleving;
@@ -35,10 +35,10 @@ public class CompanyPojo {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public String getDateOfReleving() {
+	public Date getDateOfReleving() {
 		return dateOfReleving;
 	}
-	public void setDateOfReleving(String dateOfReleving) {
+	public void setDateOfReleving(Date dateOfReleving) {
 		this.dateOfReleving = dateOfReleving;
 	}
 	public double getAmountReceived() {
