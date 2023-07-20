@@ -1,5 +1,7 @@
 package com.shapestone.jdbc;
 
+import java.sql.Date;
+
 public class Bookings_Pojo {
 	private int bookingId;
 	private int passengerId;
@@ -8,10 +10,12 @@ public class Bookings_Pojo {
 	private long distance;
 	private String modeOfTransport;
 	private float pricePerKm;
-	private String dateOfJourney ;
+	private Date dateOfJourney;
 	public int getBookingId() {
 		return bookingId;
-
+	}
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
 	public int getPassengerId() {
 		return passengerId;
@@ -49,14 +53,11 @@ public class Bookings_Pojo {
 	public void setPricePerKm(float pricePerKm) {
 		this.pricePerKm = pricePerKm;
 	}
-	public String getDateOfJourney() {
+	public Date getDateOfJourney() {
 		return dateOfJourney;
 	}
-	public void setDateOfJourney(String dateOfJourney) {
+	public void setDateOfJourney(Date dateOfJourney) {
 		this.dateOfJourney = dateOfJourney;
-	}
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
 	}
 	@Override
 	public String toString() {
@@ -67,6 +68,4 @@ public class Bookings_Pojo {
 
 
 
-
-	}
-
+}

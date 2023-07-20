@@ -8,14 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class UserOptions {
+public class Options {
 
 	public static Connection getconnection() throws SQLException {
 
@@ -91,7 +90,7 @@ public class UserOptions {
 			statementt.setLong(5, bookings.getDistance());
 			statementt.setString(6, bookings.getModeOfTransport());
 			statementt.setFloat(7, bookings.getPricePerKm());
-			statementt.setString(8, bookings.getDateOfJourney());
+			statementt.setDate(8, (java.sql.Date) bookings.getDateOfJourney());
 
 			statementt.executeUpdate();
 		}
@@ -100,26 +99,24 @@ public class UserOptions {
 	}
 
 	public static void readData() throws SQLException {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Passenger ID: ");
-		int passengerId = sc.nextInt();
-		Connection connect = getconnection();
-		String sql = "SELECT * FROM passengers WHERE PassengerId = ?";
-		PreparedStatement statement = connect.prepareStatement(sql);
-		statement.setInt(1, passengerId);
-		ResultSet resultSet = statement.executeQuery();
+	    Connection connect = getconnection();
+	    String sql = "SELECT * FROM passengers";
+	    PreparedStatement statement = connect.prepareStatement(sql);
+	    ResultSet resultSet = statement.executeQuery();
 
-		if (resultSet.next()) {
-			System.out.printf("%-10s %-20s %-10s %-10s %-20s%n", "PassengerId", "Name", "Age", "Gender", "Address");
-			System.out.println("---------------------------------------------------------------");
-			System.out.printf("%-10d %-20s %-10d %-10s %-20s%n", resultSet.getInt("PassengerId"),
-					resultSet.getString("name"), resultSet.getInt("age"), resultSet.getString("gender"),
-					resultSet.getString("address"));
-			System.out.println("---------------------------------------------------------------");
-		} else {
-			System.out.println("Invalid PassengerID.No matching passenger found.: " + passengerId);
-		}
+	    System.out.printf("%-10s %-20s %-10s %-10s %-20s%n", "PassengerId", "Name", "Age", "Gender", "Address");
+	    System.out.println("---------------------------------------------------------------");
+
+	    while (resultSet.next()) {
+	        System.out.printf("%-10d %-20s %-10d %-10s %-20s%n", resultSet.getInt("PassengerId"),
+	                resultSet.getString("name"), resultSet.getInt("age"), resultSet.getString("gender"),
+	                resultSet.getString("address"));
+	    }
+
+	    System.out.println("---------------------------------------------------------------");
 	}
+
+	
 
 	public static void update(int age, int passengerId) throws SQLException {
 		Connection connect = getconnection();

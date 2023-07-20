@@ -40,27 +40,27 @@ public class DriverPro {
 				});
 
 		if (choice == 1) {
-			UserOptions.tableCreation(bookingsList, passengersList1);
+			Options.tableCreation(bookingsList, passengersList1);
 		} else if (choice == 2) {
-			UserOptions.readData();
+			Options.readData();
 		} else if (choice == 3) {
 			System.out.println("Enter the age for Update");
 			int age = sc.nextInt();
 			System.out.println("Enter the PassengerId");
 			int passengerid = sc.nextInt();
-			UserOptions.update(age, passengerid);
+			Options.update(age, passengerid);
 		} else if (choice == 4) {
 			System.out.println("Enter BookingId to Delete");
 			int bookingId = sc.nextInt();
-			UserOptions.deleteData(bookingId);
+			Options.deleteData(bookingId);
 		} else if (choice == 5) {
-			UserOptions.passengersNamesInAscending();
+			Options.passengersNamesInAscending();
 		} else if (choice == 6) {
-			UserOptions.currentWeek();
+			Options.currentWeek();
 		} else if (choice == 7) {
 			System.out.println("Enter PassengerId");
 			String PassengerId = sc.next();
-			UserOptions.totalCost(PassengerId);
+			Options.totalCost(PassengerId);
 		}
 
 	}
